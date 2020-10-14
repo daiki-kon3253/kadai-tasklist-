@@ -5,7 +5,12 @@
 
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <h2>タスク一覧</h2>
+        <c:if test="${flush != null}">
+            <div id="flush_success">
+                <c:out value="${flush}"></c:out>
+            </div>
+        </c:if>
+         <h2>タスク一覧</h2>
         <ul>
             <c:forEach var="tasks" items="${tasks}">
                 <li>

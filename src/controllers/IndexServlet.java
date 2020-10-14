@@ -44,7 +44,14 @@ em.close();
 
     request.setAttribute("tasks",tasks);
 
-    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
+    // フラッシュメッセージがセッションスコープにセットされていたら
+    // リクエストスコープに保存する（セッションスコープからは削除）
+    if(request.getSession().getAttribute("flush") != null) {
+        request.setAttribute("flush", request.getSession().getAttribute("flush"));
+        request.getSession().removeAttribute("flush");
+    }
+
+     RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
     rd.forward(request, response);
 }
 }
